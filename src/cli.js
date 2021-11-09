@@ -1,3 +1,11 @@
 module.exports = async (process) => {
-    console.log(process.version);
+    process.title = 'SourcePoser';
+
+    const {
+        checkForBrokenNode,
+        checkForUnsupportedNode,
+    } = require('../src/utils/unsupported.js');
+
+    checkForBrokenNode();
+    checkForUnsupportedNode();
 }
