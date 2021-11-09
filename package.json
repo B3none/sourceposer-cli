@@ -1,0 +1,22 @@
+{
+  "name": "sourceposer",
+  "version": "1.0.0",
+  "description": "Sourcemod dependency management",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b3none/sourceposer.git"
+  },
+  "keywords": [
+    "Sourcemod"
+  ],
+  "author": "Alex Blackham>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/b3none/sourceposer/issues"
+  },
+  "homepage": "https://github.com/b3none/sourceposer#readme"
+}
