@@ -15,6 +15,9 @@ export class Install extends Command {
     // 7. if no update needed, then tell the user they are on the latest version already
 
     // 8. if no version installed run installation and don't do any checks for existing plugin to prevent overwrites
+    //    then tell the user that a new version was installed
+
+    // 9. update the sourceposer.json file with the installed version
 
     this.log('implement install command')
   }
