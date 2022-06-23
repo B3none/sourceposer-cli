@@ -8,7 +8,7 @@ export class Update extends Command {
   async run(): Promise<void> {
     // TODO: Implement using the steps below
     // 1. check to make sure we're in a SourceMod directory with an existing sourceposer.json
-    // 2. if we are in a SourceMod directory with no sourceposer.json  suggest that the user initialise one first
+    // 2. if we are in a SourceMod directory with no sourceposer.json suggest that the user initialise one first
     // 3. check the existing sourceposer.json for the plugin we want to update
 
     // 4. if not already installed then suggest that the user install it instead
