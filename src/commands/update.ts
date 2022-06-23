@@ -3,6 +3,8 @@ import {Command} from '@oclif/core'
 export class Update extends Command {
   static description = 'update existing plugins'
 
+  static args = [{name: 'plugin', description: 'Plugin to update, example: b3none/retakes-autoplant'}]
+
   async run(): Promise<void> {
     // TODO: Implement using the steps below
     // 1. check to make sure we're in a SourceMod directory with an existing sourceposer.json
