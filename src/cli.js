@@ -8,4 +8,6 @@ module.exports = async (process) => {
 
     checkForBrokenNode();
     checkForUnsupportedNode();
+
+    console.log('I am working!');
 }
