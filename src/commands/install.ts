@@ -25,6 +25,8 @@ export class Install extends Command {
     // 2. if no changes detected do nothing
     // 3. if changes detected install all plugins that have changed
 
-    this.log('implement install command')
+    const {args} = await this.parse(Install)
+
+    this.log('implement install command, ' + args.plugin)
   }
 }

@@ -20,6 +20,8 @@ export class Update extends Command {
 
     // 9. update the sourceposer.json file with the installed version
 
-    this.log('implement update command')
+    const {args} = await this.parse(Update)
+
+    this.log('implement update command, ' + args.plugin)
   }
 }
