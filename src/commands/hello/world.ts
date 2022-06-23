@@ -4,7 +4,7 @@ export default class World extends Command {
   static description = 'Say hello world'
 
   static examples = [
-    `$ oex hello world
+    `$ sourceposer hello world
 hello world! (./src/commands/hello/world.ts)
 `,
   ]

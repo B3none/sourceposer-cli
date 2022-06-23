@@ -62,7 +62,7 @@ DESCRIPTION
   Say hello
 
 EXAMPLES
-  $ oex hello friend --from oclif
+  $ sourceposer hello friend --from oclif
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
@@ -80,7 +80,7 @@ DESCRIPTION
   Say hello world
 
 EXAMPLES
-  $ oex hello world
+  $ sourceposer hello world
   hello world! (./src/commands/hello/world.ts)
 ```
 
