@@ -34,6 +34,8 @@ USAGE
 * [`sourceposer hello PERSON`](#sourceposer-hello-person)
 * [`sourceposer hello world`](#sourceposer-hello-world)
 * [`sourceposer help [COMMAND]`](#sourceposer-help-command)
+* [`sourceposer init`](#sourceposer-init)
+* [`sourceposer install`](#sourceposer-install)
 * [`sourceposer plugins`](#sourceposer-plugins)
 * [`sourceposer plugins:install PLUGIN...`](#sourceposer-pluginsinstall-plugin)
 * [`sourceposer plugins:inspect PLUGIN...`](#sourceposer-pluginsinspect-plugin)
@@ -43,6 +45,7 @@ USAGE
 * [`sourceposer plugins:uninstall PLUGIN...`](#sourceposer-pluginsuninstall-plugin-1)
 * [`sourceposer plugins:uninstall PLUGIN...`](#sourceposer-pluginsuninstall-plugin-2)
 * [`sourceposer plugins update`](#sourceposer-plugins-update)
+* [`sourceposer update`](#sourceposer-update)
 
 ## `sourceposer hello PERSON`
 
@@ -104,6 +107,34 @@ DESCRIPTION
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
 
+## `sourceposer init`
+
+initialise sourceposer for this sourcemod installation
+
+```
+USAGE
+  $ sourceposer init
+
+DESCRIPTION
+  initialise sourceposer for this sourcemod installation
+```
+
+_See code: [dist/commands/init.ts](https://github.com/b3none/sourceposer/blob/v0.0.0/dist/commands/init.ts)_
+
+## `sourceposer install`
+
+install a new plugin
+
+```
+USAGE
+  $ sourceposer install
+
+DESCRIPTION
+  install a new plugin
+```
+
+_See code: [dist/commands/install.ts](https://github.com/b3none/sourceposer/blob/v0.0.0/dist/commands/install.ts)_
+
 ## `sourceposer plugins`
 
 List installed plugins.
@@ -122,7 +153,7 @@ EXAMPLES
   $ sourceposer plugins
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.0.11/src/commands/plugins/index.ts)_
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.0/src/commands/plugins/index.ts)_
 
 ## `sourceposer plugins:install PLUGIN...`
 
@@ -333,4 +364,18 @@ FLAGS
 DESCRIPTION
   Update installed plugins.
 ```
+
+## `sourceposer update`
+
+find and update existing plugins
+
+```
+USAGE
+  $ sourceposer update
+
+DESCRIPTION
+  find and update existing plugins
+```
+
+_See code: [dist/commands/update.ts](https://github.com/b3none/sourceposer/blob/v0.0.0/dist/commands/update.ts)_
 <!-- commandsstop -->
