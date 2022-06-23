@@ -10,6 +10,8 @@ export class Init extends Command {
     // 3. ask the user for the name (default sourceposer)
     // 4. ask the user for the version (default 0.0.0)
     // 5. ask the user for the description (default a sourceposer managed server)
+    // 6. put those values into the sourceposer.base.json and then save it to ./sourceposer.json
+    //    relative to where the command was run
 
     // Nice to have
     // 6. ask the user if there's any plugins they would like to install to begin
