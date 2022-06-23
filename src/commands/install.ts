@@ -1,7 +1,7 @@
 import {Command} from '@oclif/core'
 
-export class Init extends Command {
-  static description = 'description of this example command'
+export class Install extends Command {
+  static description = 'install a new plugin'
 
   async run(): Promise<void> {
     this.log('implement init command')
