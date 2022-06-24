@@ -1,10 +1,20 @@
 import {Command} from '@oclif/core'
+import {isSourceModAndMetaModInstalled, isValidInstallDirectory} from '../helpers/sourcemod'
 
 export class Init extends Command {
   static description = 'initialise sourceposer for this SourceMod installation'
 
   async run(): Promise<void> {
-    // TODO: Implement using the steps below
+    if (!await isValidInstallDirectory()) {
+      this.log('Please run this command at the server directory.')
+      this.exit(0)
+    }
+
+    if (!await isSourceModAndMetaModInstalled()) {
+      this.log('You must have installed SourceMod and MetaMod before running this command.')
+      this.exit(0)
+    }
+
     // 1. check to make sure we're in a SourceMod directory
     // 2. notify the user if there's already a sourceposer.json or one close by
     // 3. ask the user for the name (default sourceposer)
