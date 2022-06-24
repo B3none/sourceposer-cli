@@ -3,6 +3,7 @@ import {isSourceModAndMetaModInstalled, isValidInstallDirectory} from '../helper
 import {isAlphaNumeric} from '../validators/string'
 import * as inquirer from 'inquirer'
 import * as semver from 'semver'
+import {generateBaseConfig} from '../helpers/config'
 
 export class Init extends Command {
   static description = 'initialise sourceposer for this SourceMod installation'
@@ -61,7 +62,9 @@ export class Init extends Command {
 
     console.log(answers)
 
-    // 6. put those values into the sourceposer.base.json and then save it to ./sourceposer.json
+    generateBaseConfig()
+
+    // 6. put those values into the sourceposer.base.ts and then save it to ./sourceposer.json
     //    relative to where the command was run
 
     // TODO: ask the user if there's any plugins they would like to install to begin

@@ -1,8 +1,6 @@
-export function getUpdatedConfig(old: string, latest: string): string {
-  // If our old config file is the same as the new config file, return the newer version
-  if (old === latest) {
-    return latest
-  }
+import {ConfigType} from '../types/config'
+import baseConfig from '../templates/sourceposer.base'
 
-  return ''
+export async function generateBaseConfig(): Promise<ConfigType|void> {
+  console.log(JSON.stringify(baseConfig))
 }
