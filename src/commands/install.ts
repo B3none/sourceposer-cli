@@ -10,7 +10,7 @@ export class Install extends Command {
 
     // if plugin passed:
     // 1. check to make sure we're in a SourceMod directory with an existing sourceposer.json
-    // 2. if we are in a SourceMod directory with no sourceposer.json ask the user if they would like to initialise one
+    // 2. if we are in a SourceMod directory with no sourceposer.json suggest that the user initialise one first
     // 3. check the existing sourceposer.json for the plugin we want to install
 
     // 4. if already installed then suggest that the user update it instead
