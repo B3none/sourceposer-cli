@@ -1,5 +1,5 @@
-import {Dirent, promises} from 'node:fs'
-const {readdir} = promises
+import {Dirent} from 'node:fs'
+import {readdir} from 'node:fs/promises'
 
 export async function getSubDirectories(source: string): Promise<string[]> {
   const children: Dirent[] = await readdir(source, {withFileTypes: true})

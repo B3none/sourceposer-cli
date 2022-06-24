@@ -24,8 +24,12 @@
   "devDependencies": {
     "@oclif/test": "^2",
     "@types/chai": "^4",
+    "@types/inquirer": "^8.2.1",
     "@types/mocha": "^9.1.1",
     "@types/node": "^16.11.41",
+    "@types/semver": "^7.3.10",
+    "inquirer": "^8.2.3",
+    "semver": "^7.3.7",
     "chai": "^4",
     "eslint": "^7.32.0",
     "eslint-config-oclif": "^4",
