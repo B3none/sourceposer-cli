@@ -3,7 +3,7 @@ import {isSourceModAndMetaModInstalled, isValidInstallDirectory} from '../helper
 import {isAlphaNumeric} from '../validators/string'
 import * as inquirer from 'inquirer'
 import * as semver from 'semver'
-import {generateBaseConfig} from '../helpers/config'
+import {generateBaseConfig, hasConfigFile, baseConfig} from '../helpers/config'
 
 export class Init extends Command {
   static description = 'initialise sourceposer for this SourceMod installation'
@@ -20,6 +20,11 @@ export class Init extends Command {
       this.exit()
     }
 
+    if (await hasConfigFile()) {
+      this.log('You have already initialised sourceposer here')
+      this.exit()
+    }
+
     // TODO: notify the user if there's already a sourceposer.json or one close by
 
     const answers = await inquirer.prompt([
@@ -27,7 +32,7 @@ export class Init extends Command {
         name: 'name',
         type: 'input',
         message: 'What is the name of this server?',
-        default: 'sourceposer',
+        default: baseConfig.name,
         validate(input: string): boolean | string {
           if (isAlphaNumeric(input)) {
             return true
@@ -40,7 +45,7 @@ export class Init extends Command {
         name: 'version',
         type: 'input',
         message: 'What is the version of this server?',
-        default: '1.0.0',
+        default: baseConfig.version,
         validate(input: string): boolean | string {
           if (input.length === 0 || !semver.valid(input)) {
             return 'Please enter a valid version'
@@ -56,13 +61,20 @@ export class Init extends Command {
         name: 'description',
         type: 'input',
         message: 'What is the description of this server?',
-        default: 'A sourceposer managed server',
+        default: baseConfig.description,
+      },
+      {
+        name: 'author',
+        type: 'input',
+        message: 'Who is the author of this server?',
+        default: baseConfig.author,
       },
     ])
 
-    console.log(answers)
-
-    generateBaseConfig()
+    await generateBaseConfig({
+      ...baseConfig,
+      ...answers,
+    })
 
     // 6. put those values into the sourceposer.base.ts and then save it to ./sourceposer.json
     //    relative to where the command was run
