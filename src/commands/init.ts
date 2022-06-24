@@ -7,12 +7,12 @@ export class Init extends Command {
   async run(): Promise<void> {
     if (!await isValidInstallDirectory()) {
       this.log('Please run this command at the server directory.')
-      this.exit(0)
+      this.exit()
     }
 
     if (!await isSourceModAndMetaModInstalled()) {
       this.log('You must have installed SourceMod and MetaMod before running this command.')
-      this.exit(0)
+      this.exit()
     }
 
     // 1. check to make sure we're in a SourceMod directory
