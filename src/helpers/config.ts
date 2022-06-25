@@ -6,6 +6,7 @@ export const baseConfig = {
   version: '1.0.0',
   description: 'a sourceposer managed server',
   author: 'server developer',
+  type: 'server',
   plugins: {},
 } as ConfigType
 
