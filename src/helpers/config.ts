@@ -23,7 +23,7 @@ export async function getConfigFile(): Promise<ConfigType> {
 }
 
 // TODO: ensure this was actually created / handle errors
-export async function createConfig(config: ConfigType): Promise<void> {
+export async function saveConfig(config: ConfigType): Promise<void> {
   await writeFile(process.cwd() + '/sourceposer.json', JSON.stringify(config, null, 4))
 }
 

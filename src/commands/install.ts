@@ -1,7 +1,8 @@
 import {Command} from '@oclif/core'
-import {getConfigFile, hasConfigFile, hasPlugin} from '../helpers/config'
+import {getConfigFile, hasConfigFile, hasPlugin, saveConfig} from '../helpers/config'
 import {isSourceModAndMetaModInstalled, isValidInstallDirectory} from '../helpers/sourcemod'
 import {ConfigType} from '../types/config'
+import {getReleases} from '../helpers/releases'
 
 export class Install extends Command {
   static aliases = ['i']
@@ -40,22 +41,45 @@ export class Install extends Command {
         this.exit()
       }
 
+      const releases: Record<string, string>|null = await getReleases(plugin)
+
+      if (!releases) {
+        this.log(`${plugin} does not exist and cannot be installed`)
+        this.exit()
+        return // this is for the type guard
+      }
+
+      const releaseVersions: string[] = Object.keys(releases)
+
+      if (releaseVersions.length === 0) {
+        this.log(`${plugin} does not have any releases and cannot be installed`)
+        this.exit()
+      }
+
       if (version) {
         this.log(`version ${version} specified`)
+
+        if (!releaseVersions.includes(version)) {
+          this.log(`${plugin} does not have a release version ${version}`)
+          this.exit()
+        }
+
+        config.plugins[plugin] = version
+      } else {
+        const latestVersion = releaseVersions[0]
+        this.log('version not specified')
+        this.log(`adding version ${latestVersion}`)
+
+        config.plugins[plugin] = latestVersion
       }
+
+      await saveConfig(config)
     }
 
     // perform install
     this.log('perform install')
 
     // TODO: Implement using the steps below
-
-    // 1. check to make sure we're in a SourceMod directory with an existing sourceposer.json
-    // 2. if we are in a SourceMod directory with no sourceposer.json suggest that the user initialise one first
-
-    // if plugin passed:
-    // 3. check the existing sourceposer.json for the plugin we want to install
-    // 4. if already installed then suggest that the user update it instead
 
     // 5. if no version installed run installation and don't do any checks for existing plugin to prevent overwrites
     //    then tell the user that a new version was installed
