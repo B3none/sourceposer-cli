@@ -3,6 +3,7 @@ import {getConfigFile, hasConfigFile, hasPlugin, saveConfig} from '../helpers/co
 import {isSourceModAndMetaModInstalled, isValidInstallDirectory} from '../helpers/sourcemod'
 import {ConfigType} from '../types/config'
 import {getReleases} from '../helpers/releases'
+import {isAlphaNumeric} from '../helpers/validators/string'
 
 export class Install extends Command {
   static aliases = ['i']
@@ -32,6 +33,24 @@ export class Install extends Command {
     const {args} = await this.parse(Install)
 
     if (args.plugin) {
+      if (typeof args.plugin !== 'string') {
+        this.log('Invalid plugin string')
+        this.exit()
+      }
+
+      const pluginArg: string = args.plugin.trim()
+
+      if (
+        pluginArg.length === 0 ||
+        pluginArg.includes(' ') ||
+        !pluginArg.includes('/') ||
+        pluginArg.split('/').filter((i: string) => i).length !== 2 ||
+        !isAlphaNumeric(pluginArg, '-_/')
+      ) {
+        this.log('Invalid plugin string')
+        this.exit()
+      }
+
       const [plugin, version] = args.plugin.split('@')
 
       this.log(`plugin ${plugin} specified`)
