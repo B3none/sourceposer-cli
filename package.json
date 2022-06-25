@@ -19,7 +19,6 @@
   "dependencies": {
     "@oclif/core": "^1",
     "@oclif/plugin-help": "^5",
-    "@oclif/plugin-plugins": "^2.1.0",
     "axios": "^0.27.2"
   },
   "devDependencies": {
@@ -48,8 +47,7 @@
     "dirname": "sourceposer",
     "commands": "./dist/commands",
     "plugins": [
-      "@oclif/plugin-help",
-      "@oclif/plugin-plugins"
+      "@oclif/plugin-help"
     ],
     "topicSeparator": " ",
     "topics": {

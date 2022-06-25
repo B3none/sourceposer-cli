@@ -34,18 +34,10 @@ USAGE
 * [`sourceposer hello PERSON`](#sourceposer-hello-person)
 * [`sourceposer hello world`](#sourceposer-hello-world)
 * [`sourceposer help [COMMAND]`](#sourceposer-help-command)
+* [`sourceposer i [PLUGIN]`](#sourceposer-i-plugin)
 * [`sourceposer init`](#sourceposer-init)
-* [`sourceposer install`](#sourceposer-install)
-* [`sourceposer plugins`](#sourceposer-plugins)
-* [`sourceposer plugins:install PLUGIN...`](#sourceposer-pluginsinstall-plugin)
-* [`sourceposer plugins:inspect PLUGIN...`](#sourceposer-pluginsinspect-plugin)
-* [`sourceposer plugins:install PLUGIN...`](#sourceposer-pluginsinstall-plugin-1)
-* [`sourceposer plugins:link PLUGIN`](#sourceposer-pluginslink-plugin)
-* [`sourceposer plugins:uninstall PLUGIN...`](#sourceposer-pluginsuninstall-plugin)
-* [`sourceposer plugins:uninstall PLUGIN...`](#sourceposer-pluginsuninstall-plugin-1)
-* [`sourceposer plugins:uninstall PLUGIN...`](#sourceposer-pluginsuninstall-plugin-2)
-* [`sourceposer plugins update`](#sourceposer-plugins-update)
-* [`sourceposer update`](#sourceposer-update)
+* [`sourceposer install [PLUGIN]`](#sourceposer-install-plugin)
+* [`sourceposer update [PLUGIN]`](#sourceposer-update-plugin)
 
 ## `sourceposer hello PERSON`
 
@@ -107,274 +99,71 @@ DESCRIPTION
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
 
+## `sourceposer i [PLUGIN]`
+
+install a new plugin
+
+```
+USAGE
+  $ sourceposer i [PLUGIN]
+
+ARGUMENTS
+  PLUGIN  Plugin to install, example: b3none/retakes-autoplant
+
+DESCRIPTION
+  install a new plugin
+
+ALIASES
+  $ sourceposer i
+```
+
 ## `sourceposer init`
 
-initialise sourceposer for this sourcemod installation
+initialise sourceposer for this SourceMod installation
 
 ```
 USAGE
   $ sourceposer init
 
 DESCRIPTION
-  initialise sourceposer for this sourcemod installation
+  initialise sourceposer for this SourceMod installation
 ```
 
 _See code: [dist/commands/init.ts](https://github.com/b3none/sourceposer/blob/v0.0.0/dist/commands/init.ts)_
 
-## `sourceposer install`
+## `sourceposer install [PLUGIN]`
 
 install a new plugin
 
 ```
 USAGE
-  $ sourceposer install
+  $ sourceposer install [PLUGIN]
+
+ARGUMENTS
+  PLUGIN  Plugin to install, example: b3none/retakes-autoplant
 
 DESCRIPTION
   install a new plugin
+
+ALIASES
+  $ sourceposer i
 ```
 
 _See code: [dist/commands/install.ts](https://github.com/b3none/sourceposer/blob/v0.0.0/dist/commands/install.ts)_
 
-## `sourceposer plugins`
+## `sourceposer update [PLUGIN]`
 
-List installed plugins.
-
-```
-USAGE
-  $ sourceposer plugins [--core]
-
-FLAGS
-  --core  Show core plugins.
-
-DESCRIPTION
-  List installed plugins.
-
-EXAMPLES
-  $ sourceposer plugins
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.0/src/commands/plugins/index.ts)_
-
-## `sourceposer plugins:install PLUGIN...`
-
-Installs a plugin into the CLI.
+update existing plugins
 
 ```
 USAGE
-  $ sourceposer plugins:install PLUGIN...
+  $ sourceposer update [PLUGIN]
 
 ARGUMENTS
-  PLUGIN  Plugin to install.
-
-FLAGS
-  -f, --force    Run yarn install with force flag.
-  -h, --help     Show CLI help.
-  -v, --verbose
+  PLUGIN  Plugin to update, example: b3none/retakes-autoplant
 
 DESCRIPTION
-  Installs a plugin into the CLI.
-
-  Can be installed from npm or a git url.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
-  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
-  the CLI without the need to patch and update the whole CLI.
-
-ALIASES
-  $ sourceposer plugins add
-
-EXAMPLES
-  $ sourceposer plugins:install myplugin 
-
-  $ sourceposer plugins:install https://github.com/someuser/someplugin
-
-  $ sourceposer plugins:install someuser/someplugin
-```
-
-## `sourceposer plugins:inspect PLUGIN...`
-
-Displays installation properties of a plugin.
-
-```
-USAGE
-  $ sourceposer plugins:inspect PLUGIN...
-
-ARGUMENTS
-  PLUGIN  [default: .] Plugin to inspect.
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Displays installation properties of a plugin.
-
-EXAMPLES
-  $ sourceposer plugins:inspect myplugin
-```
-
-## `sourceposer plugins:install PLUGIN...`
-
-Installs a plugin into the CLI.
-
-```
-USAGE
-  $ sourceposer plugins:install PLUGIN...
-
-ARGUMENTS
-  PLUGIN  Plugin to install.
-
-FLAGS
-  -f, --force    Run yarn install with force flag.
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Installs a plugin into the CLI.
-
-  Can be installed from npm or a git url.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
-  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
-  the CLI without the need to patch and update the whole CLI.
-
-ALIASES
-  $ sourceposer plugins add
-
-EXAMPLES
-  $ sourceposer plugins:install myplugin 
-
-  $ sourceposer plugins:install https://github.com/someuser/someplugin
-
-  $ sourceposer plugins:install someuser/someplugin
-```
-
-## `sourceposer plugins:link PLUGIN`
-
-Links a plugin into the CLI for development.
-
-```
-USAGE
-  $ sourceposer plugins:link PLUGIN
-
-ARGUMENTS
-  PATH  [default: .] path to plugin
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Links a plugin into the CLI for development.
-
-  Installation of a linked plugin will override a user-installed or core plugin.
-
-  e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
-  command will override the user-installed or core plugin implementation. This is useful for development work.
-
-EXAMPLES
-  $ sourceposer plugins:link myplugin
-```
-
-## `sourceposer plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ sourceposer plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ sourceposer plugins unlink
-  $ sourceposer plugins remove
-```
-
-## `sourceposer plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ sourceposer plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ sourceposer plugins unlink
-  $ sourceposer plugins remove
-```
-
-## `sourceposer plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ sourceposer plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ sourceposer plugins unlink
-  $ sourceposer plugins remove
-```
-
-## `sourceposer plugins update`
-
-Update installed plugins.
-
-```
-USAGE
-  $ sourceposer plugins update [-h] [-v]
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Update installed plugins.
-```
-
-## `sourceposer update`
-
-find and update existing plugins
-
-```
-USAGE
-  $ sourceposer update
-
-DESCRIPTION
-  find and update existing plugins
+  update existing plugins
 ```
 
 _See code: [dist/commands/update.ts](https://github.com/b3none/sourceposer/blob/v0.0.0/dist/commands/update.ts)_
