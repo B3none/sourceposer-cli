@@ -35,7 +35,7 @@ export class Install extends Command {
     if (args.plugin) {
       if (typeof args.plugin !== 'string') {
         this.log('Invalid plugin string')
-        this.exit()
+        return this.exit()
       }
 
       const pluginArg: string = args.plugin.trim()
@@ -64,8 +64,7 @@ export class Install extends Command {
 
       if (!releases) {
         this.log(`${plugin} does not exist and cannot be installed`)
-        this.exit()
-        return // this is for the type guard
+        return this.exit() // this is for the type guard
       }
 
       const releaseVersions: string[] = Object.keys(releases)
@@ -85,7 +84,8 @@ export class Install extends Command {
 
         config.plugins[plugin] = version
       } else {
-        const latestVersion = releaseVersions[0]
+        const latestVersion: string = releaseVersions[0]
+
         this.log('version not specified')
         this.log(`adding version ${latestVersion}`)
 
