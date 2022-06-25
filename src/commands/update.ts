@@ -13,7 +13,7 @@ export class Update extends Command {
 
     // 4. if not already installed then suggest that the user install it instead
 
-    // 5. check the current version against the latest github release version
+    // 5. check the current version against the latest github release version - https://api.github.com/repos/b3none/retakes-autoplant/tags
     // 6. if not on the latest version update the plugin to the latest version
     // 7. if update needed, perform update, then tell the user whether or not the plugin was installed successfully
     // 8. if no update needed, then tell the user they are on the latest version already

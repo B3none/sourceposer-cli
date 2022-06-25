@@ -3,7 +3,7 @@ import {isSourceModAndMetaModInstalled, isValidInstallDirectory} from '../helper
 import {isAlphaNumeric} from '../helpers/validators/string'
 import * as inquirer from 'inquirer'
 import * as semver from 'semver'
-import {generateBaseConfig, hasConfigFile, baseConfig} from '../helpers/config'
+import {createConfig, hasConfigFile, baseConfig} from '../helpers/config'
 
 export class Init extends Command {
   static description = 'initialise sourceposer for this SourceMod installation'
@@ -70,7 +70,7 @@ export class Init extends Command {
       },
     ])
 
-    await generateBaseConfig({
+    await createConfig({
       ...baseConfig,
       ...answers,
     })
