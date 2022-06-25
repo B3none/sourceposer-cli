@@ -1,6 +1,6 @@
 import {Command} from '@oclif/core'
 import {isSourceModAndMetaModInstalled, isValidInstallDirectory} from '../helpers/sourcemod'
-import {isAlphaNumeric} from '../validators/string'
+import {isAlphaNumeric} from '../helpers/validators/string'
 import * as inquirer from 'inquirer'
 import * as semver from 'semver'
 import {generateBaseConfig, hasConfigFile, baseConfig} from '../helpers/config'
@@ -10,18 +10,17 @@ export class Init extends Command {
 
   async run(): Promise<void> {
     if (!await isValidInstallDirectory()) {
-      this.log('Please run this command at the server directory.')
+      this.log('Please run this command in the server directory.')
       this.exit()
     }
 
-    // 1. check to make sure we're in a SourceMod directory
     if (!await isSourceModAndMetaModInstalled()) {
       this.log('You must have installed SourceMod and MetaMod before running this command.')
       this.exit()
     }
 
     if (await hasConfigFile()) {
-      this.log('You have already initialised sourceposer here')
+      this.log('You have already initialised sourceposer here.')
       this.exit()
     }
 
@@ -38,7 +37,7 @@ export class Init extends Command {
             return true
           }
 
-          return 'Please enter an alphanumeric name'
+          return 'Please enter an alphanumeric name.'
         },
       },
       {
@@ -48,7 +47,7 @@ export class Init extends Command {
         default: baseConfig.version,
         validate(input: string): boolean | string {
           if (input.length === 0 || !semver.valid(input)) {
-            return 'Please enter a valid version'
+            return 'Please enter a valid version.'
           }
 
           return true
@@ -76,11 +75,8 @@ export class Init extends Command {
       ...answers,
     })
 
-    // 6. put those values into the sourceposer.base.ts and then save it to ./sourceposer.json
-    //    relative to where the command was run
-
     // TODO: ask the user if there's any plugins they would like to install to begin
 
-    this.log('implement init command')
+    this.log('sourceposer initialised!')
   }
 }

@@ -1,4 +1,6 @@
 import {Command} from '@oclif/core'
+import {hasConfigFile} from '../helpers/config'
+import {isSourceModAndMetaModInstalled, isValidInstallDirectory} from '../helpers/sourcemod'
 
 export class Install extends Command {
   static description = 'install a new plugin'
@@ -6,6 +8,21 @@ export class Install extends Command {
   static args = [{name: 'plugin', description: 'Plugin to install, example: b3none/retakes-autoplant'}]
 
   async run(): Promise<void> {
+    if (!await isValidInstallDirectory()) {
+      this.log('Please run this command in the server directory.')
+      this.exit()
+    }
+
+    if (!await isSourceModAndMetaModInstalled()) {
+      this.log('You must have installed SourceMod and MetaMod before running this command.')
+      this.exit()
+    }
+
+    if (!await hasConfigFile()) {
+      this.log('You must initialise sourceposer first.')
+      this.exit()
+    }
+
     // TODO: Implement using the steps below
 
     // if plugin passed:
