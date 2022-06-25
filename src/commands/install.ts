@@ -1,8 +1,11 @@
 import {Command} from '@oclif/core'
-import {hasConfigFile} from '../helpers/config'
+import {getConfigFile, hasConfigFile, hasPlugin} from '../helpers/config'
 import {isSourceModAndMetaModInstalled, isValidInstallDirectory} from '../helpers/sourcemod'
+import {ConfigType} from '../types/config'
 
 export class Install extends Command {
+  static aliases = ['i']
+
   static description = 'install a new plugin'
 
   static args = [{name: 'plugin', description: 'Plugin to install, example: b3none/retakes-autoplant'}]
@@ -23,13 +26,34 @@ export class Install extends Command {
       this.exit()
     }
 
+    const config: ConfigType = await getConfigFile()
+
+    const {args} = await this.parse(Install)
+
+    if (args.plugin) {
+      this.log('Plugin passed')
+      const [plugin, version] = args.plugin.split('@')
+
+      if (hasPlugin(config, plugin)) {
+        this.log('This plugin already exists, did you meant to update?')
+        this.exit()
+      }
+
+      if (version) {
+        this.log(`version ${version} specified`)
+      }
+    }
+
+    // perform install
+    this.log('perform install')
+
     // TODO: Implement using the steps below
 
-    // if plugin passed:
     // 1. check to make sure we're in a SourceMod directory with an existing sourceposer.json
     // 2. if we are in a SourceMod directory with no sourceposer.json suggest that the user initialise one first
-    // 3. check the existing sourceposer.json for the plugin we want to install
 
+    // if plugin passed:
+    // 3. check the existing sourceposer.json for the plugin we want to install
     // 4. if already installed then suggest that the user update it instead
 
     // 5. if no version installed run installation and don't do any checks for existing plugin to prevent overwrites
@@ -42,8 +66,6 @@ export class Install extends Command {
     // 2. if no changes detected do nothing
     // 3. if changes detected install all plugins that have changed
 
-    const {args} = await this.parse(Install)
-
-    this.log('implement install command, ' + args.plugin)
+    this.log('implement install command')
   }
 }
