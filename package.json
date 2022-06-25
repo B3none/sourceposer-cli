@@ -47,8 +47,15 @@
     "dirname": "sourceposer",
     "commands": "./dist/commands",
     "plugins": [
-      "@oclif/plugin-help"
+      "@oclif/plugin-help",
+      "@oclif/plugin-warn-if-update-available"
     ],
+    "warn-if-update-available": {
+      "timeoutInDays": 7,
+      "message": "<%= config.name %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>.",
+      "registry": "https://my.example.com/module/registry",
+      "authorization": "Basic <SOME READ ONLY AUTH TOKEN>"
+    },
     "topicSeparator": " ",
     "topics": {
       "hello": {
