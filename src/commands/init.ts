@@ -30,7 +30,7 @@ export class Init extends Command {
       {
         name: 'name',
         type: 'input',
-        message: 'What is the name of this server?',
+        message: 'What is the name of this project?',
         default: baseConfig.name,
         validate(input: string): boolean | string {
           if (isAlphaNumeric(input)) {
@@ -43,7 +43,7 @@ export class Init extends Command {
       {
         name: 'version',
         type: 'input',
-        message: 'What is the version of this server?',
+        message: 'What is the version of this project?',
         default: baseConfig.version,
         validate(input: string): boolean | string {
           if (input.length === 0 || !semver.valid(input)) {
@@ -59,14 +59,21 @@ export class Init extends Command {
       {
         name: 'description',
         type: 'input',
-        message: 'What is the description of this server?',
+        message: 'What is the description of this project?',
         default: baseConfig.description,
       },
       {
         name: 'author',
         type: 'input',
-        message: 'Who is the author of this server?',
+        message: 'Who is the author of this project?',
         default: baseConfig.author,
+      },
+      {
+        name: 'type',
+        type: 'list',
+        message: 'What type of project is this?',
+        choices: ['server', 'plugin'],
+        default: baseConfig.type,
       },
     ])
 

@@ -3,5 +3,6 @@ export interface ConfigType {
   version: string;
   description: string;
   author: string;
-  plugins: Record<string, string>
+  type: 'server' | 'plugin';
+  plugins: Record<string, string>;
 }

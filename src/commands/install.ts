@@ -31,8 +31,9 @@ export class Install extends Command {
     const {args} = await this.parse(Install)
 
     if (args.plugin) {
-      this.log('Plugin passed')
       const [plugin, version] = args.plugin.split('@')
+
+      this.log(`plugin ${plugin} specified`)
 
       if (hasPlugin(config, plugin)) {
         this.log('This plugin already exists, did you meant to update?')
