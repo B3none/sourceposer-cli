@@ -56,7 +56,7 @@ export class Install extends Command {
       this.log(`plugin ${plugin} specified`)
 
       if (hasPlugin(config, plugin)) {
-        this.log('This plugin already exists, did you meant to update?')
+        this.log('This plugin already exists, did you mean to update?')
         this.exit()
       }
 
