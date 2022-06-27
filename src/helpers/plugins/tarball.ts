@@ -11,5 +11,6 @@ async function downloadTarball(plugin: string, version: string) {
 }
 
 export async function processTarball(plugin: string, version: string): Promise<boolean> {
+  console.log("process tarball")
   return true
 }

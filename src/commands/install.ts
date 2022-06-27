@@ -4,6 +4,7 @@ import {isSourceModAndMetaModInstalled, isValidInstallDirectory} from '../helper
 import {ConfigType} from '../types/config'
 import {getReleases} from '../helpers/releases'
 import {isAlphaNumeric} from '../helpers/validators/string'
+import { installPlugin, installPlugins } from '../helpers/plugins/install'
 
 export class Install extends Command {
   static aliases = ['i']
@@ -97,7 +98,7 @@ export class Install extends Command {
 
     // perform install
     this.log('perform install')
-
+    installPlugins(config.plugins)
     // TODO: Implement using the steps below
 
     // 5. if no version installed run installation and don't do any checks for existing plugin to prevent overwrites
