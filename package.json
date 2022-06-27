@@ -22,7 +22,9 @@
     "@oclif/plugin-warn-if-update-available": "^2.0.4",
     "axios": "^0.27.2",
     "decompress": "^4.2.1",
-    "request": "^2.88.2"
+    "decompress-targz": "^4.1.1",
+    "request": "^2.88.2",
+    "tar-stream": "^2.2.0"
   },
   "devDependencies": {
     "@oclif/test": "^2",
@@ -33,6 +35,7 @@
     "@types/node": "^16.11.41",
     "@types/request": "^2.48.8",
     "@types/semver": "^7.3.10",
+    "@types/tar-stream": "^2.2.2",
     "chai": "^4",
     "eslint": "^7.32.0",
     "eslint-config-oclif": "^4",

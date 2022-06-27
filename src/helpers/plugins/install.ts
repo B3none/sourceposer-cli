@@ -13,6 +13,6 @@ export async function installPlugins(plugins: Record<string, string>): Promise<(
 // TODO: implement
 export async function installPlugin(plugin: string, version: string): Promise<string|null> {
   await downloadTarball(plugin, version)
-
+  await processTarball(plugin, version)
   return ''
 }

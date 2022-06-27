@@ -2,6 +2,8 @@ import * as decompress from 'decompress'
 import * as fs from 'node:fs'
 import {createIfDoesNotExist} from '../directory'
 import * as request from 'request'
+import * as zlib from 'zlib'
+import * as tar from 'tar-stream'
 
 function getTarballUrl(plugin: string, version: string): string {
   return `https://api.github.com/repos/${plugin}/tarball/refs/tags/${version}`
@@ -28,8 +30,16 @@ export async function downloadTarball(plugin: string, version: string): Promise<
 }
 
 export async function processTarball(plugin: string, version: string): Promise<void> {
+  console.log("process tarball")
   // TODO: implement the following
-  // 1. decompress the downloaded tar.gz
+  const directory = `${process.cwd()}/tmp/${plugin}/`
+  const localTarball = `${directory}${version}.tar.gz`
+  // 1. decompress the downloaded tar https://github.com/kevva/decompress#api
+  fs.createReadStream(localTarball)
+    .pipe(zlib.createGunzip())
+    .pipe(tar.extract());
+  
   // 2. scan the directories within the decompressed files - i've already written a function to do this in helpers/directory.ts getSubDirectories()
-  // 3. copy the `addons/` and `cfg/` directories to the main sourcemod install (the same location as the sourceposer.json)
+
+  // 3. copy the `addons/` and `cfg/` directories (if they exist) to the main sourcemod install (the same location as the sourceposer.json)
 }
