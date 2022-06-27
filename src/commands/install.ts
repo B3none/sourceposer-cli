@@ -98,7 +98,8 @@ export class Install extends Command {
 
     // perform install
     this.log('perform install')
-    installPlugins(config.plugins)
+
+    await installPlugins(config.plugins)
     // TODO: Implement using the steps below
 
     // 5. if no version installed run installation and don't do any checks for existing plugin to prevent overwrites

@@ -21,7 +21,8 @@
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-warn-if-update-available": "^2.0.4",
     "axios": "^0.27.2",
-    "decompress": "^4.2.1"
+    "decompress": "^4.2.1",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@oclif/test": "^2",
@@ -30,6 +31,7 @@
     "@types/inquirer": "^8.2.1",
     "@types/mocha": "^9.1.1",
     "@types/node": "^16.11.41",
+    "@types/request": "^2.48.8",
     "@types/semver": "^7.3.10",
     "chai": "^4",
     "eslint": "^7.32.0",
