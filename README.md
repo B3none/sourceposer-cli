@@ -31,53 +31,11 @@ USAGE
 
 # Commands
 <!-- commands -->
-* [`sourceposer hello PERSON`](#sourceposer-hello-person)
-* [`sourceposer hello world`](#sourceposer-hello-world)
 * [`sourceposer help [COMMAND]`](#sourceposer-help-command)
 * [`sourceposer i [PLUGIN]`](#sourceposer-i-plugin)
 * [`sourceposer init`](#sourceposer-init)
 * [`sourceposer install [PLUGIN]`](#sourceposer-install-plugin)
 * [`sourceposer update [PLUGIN]`](#sourceposer-update-plugin)
-
-## `sourceposer hello PERSON`
-
-Say hello
-
-```
-USAGE
-  $ sourceposer hello [PERSON] -f <value>
-
-ARGUMENTS
-  PERSON  Person to say hello to
-
-FLAGS
-  -f, --from=<value>  (required) Whom is saying hello
-
-DESCRIPTION
-  Say hello
-
-EXAMPLES
-  $ sourceposer hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
-```
-
-_See code: [dist/commands/hello/index.ts](https://github.com/b3none/sourceposer/blob/v0.0.0/dist/commands/hello/index.ts)_
-
-## `sourceposer hello world`
-
-Say hello world
-
-```
-USAGE
-  $ sourceposer hello world
-
-DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ sourceposer hello world
-  hello world! (./src/commands/hello/world.ts)
-```
 
 ## `sourceposer help [COMMAND]`
 
