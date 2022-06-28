@@ -67,9 +67,7 @@ export async function processTarball(plugin: string, version: string): Promise<v
       }
     }
 
-    // call callback() when you're done with this entry
     const path = `${extractDirectory}/${header.name}`
-    // let data = ''
 
     if (header.type === 'directory') {
       console.log('creating directory:', `${extractDirectory}/${header.name}`)

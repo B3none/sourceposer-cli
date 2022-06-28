@@ -4,7 +4,7 @@ import {isSourceModAndMetaModInstalled, isValidInstallDirectory} from '../helper
 import {ConfigType} from '../types/config'
 import {getReleases} from '../helpers/releases'
 import {isAlphaNumeric} from '../helpers/validators/string'
-import { installPlugin, installPlugins } from '../helpers/plugins/install'
+import {installPlugin, installPlugins} from '../helpers/plugins/install'
 
 export class Install extends Command {
   static aliases = ['i']
@@ -111,7 +111,5 @@ export class Install extends Command {
     // 1. compare current sourceposer.json against sourceposer.lock
     // 2. if no changes detected do nothing
     // 3. if changes detected install all plugins that have changed
-
-    this.log('implement install command')
   }
 }
