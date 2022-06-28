@@ -21,6 +21,7 @@
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-warn-if-update-available": "^2.0.4",
     "axios": "^0.27.2",
+    "node-gzip": "^1.1.2",
     "request": "^2.88.2",
     "tar-stream": "^2.2.0"
   },
@@ -30,6 +31,7 @@
     "@types/inquirer": "^8.2.1",
     "@types/mocha": "^9.1.1",
     "@types/node": "^16.11.41",
+    "@types/node-gzip": "^1.1.0",
     "@types/request": "^2.48.8",
     "@types/semver": "^7.3.10",
     "@types/tar-stream": "^2.2.2",
