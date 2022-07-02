@@ -7,7 +7,7 @@ export async function isValidInstallDirectory(directory: string|null = null): Pr
 
   const subDirectories: string[] = await getSubDirectories(directory)
 
-  if (!subDirectories.includes('addons') || !subDirectories.includes('cfg')) {
+  if (!subDirectories.includes('addons') && !subDirectories.includes('cfg')) {
     return false
   }
 
@@ -21,7 +21,7 @@ export async function isSourceModAndMetaModInstalled(installDirectory: string|nu
 
   const subDirectories: string[] = await getSubDirectories(`${installDirectory}/addons`)
 
-  if (!subDirectories.includes('metamod') || !subDirectories.includes('sourcemod')) {
+  if (!subDirectories.includes('metamod') && !subDirectories.includes('sourcemod')) {
     return false
   }
 

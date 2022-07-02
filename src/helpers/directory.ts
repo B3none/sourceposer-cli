@@ -12,11 +12,18 @@ export function doesDirectoryExist(directory: string): boolean {
   return existsSync(directory)
 }
 
-export function createIfDoesNotExist(directory: string): void {
+export function createIfDoesNotExist(directory: string, recursive = true): void {
   if (!doesDirectoryExist(directory)) {
     mkdirSync(directory, {
-      recursive: true,
+      recursive,
     })
   }
 }
 
+export function getInstallDirectory(): string {
+  return process.cwd()
+}
+
+export function getPluginDirectory(plugin: string, isTemp = false): string {
+  return `${getInstallDirectory()}/${isTemp ? 'tmp/' : ''}${plugin}`
+}

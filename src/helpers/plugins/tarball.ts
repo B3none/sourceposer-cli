@@ -1,4 +1,4 @@
-import {createIfDoesNotExist} from '../directory'
+import {createIfDoesNotExist, getPluginDirectory} from '../directory'
 import * as fs from 'node:fs'
 import {writeFile, readFile, unlink} from 'node:fs/promises'
 import * as request from 'request'
@@ -10,12 +10,8 @@ function getTarballUrl(plugin: string, version: string): string {
   return `https://api.github.com/repos/${plugin}/tarball/refs/tags/${version}`
 }
 
-function getDirectory(plugin: string): string {
-  return `${process.cwd()}/tmp/${plugin}`
-}
-
 function getTarball(plugin: string, version: string): string {
-  return `${getDirectory(plugin)}/${version}.tar.gz`
+  return `${getPluginDirectory(plugin, true)}/${version}.tar.gz`
 }
 
 export async function downloadTarball(plugin: string, version: string): Promise<void> {
@@ -23,7 +19,7 @@ export async function downloadTarball(plugin: string, version: string): Promise<
 
   const tarballUrl = getTarballUrl(plugin, version)
 
-  const directory = getDirectory(plugin)
+  const directory = getPluginDirectory(plugin, true)
   const localTarball = `${directory}/${version}.tar.gz`
 
   console.log('writing:', localTarball)
@@ -52,14 +48,14 @@ export async function extractTarball(plugin: string, version: string): Promise<v
     console.log('[DEBUG] decompressing tarball')
     const decompressed = await ungzip(compressedContents)
 
-    const extractDirectory: string = getDirectory(plugin)
+    const extractDirectory: string = getPluginDirectory(plugin, true)
 
     console.log('[DEBUG] extracting tarball contents')
     const writePromises: Promise<void>[] = []
 
     const extract = tar.extract()
     .on('entry', async (header, stream, callback) => {
-    // remove the top level directory
+      // remove the top level directory
       header.name = header.name.slice(Math.max(0, header.name.indexOf('/') + 1))
 
       // only allow files in addons or cfg directories
@@ -96,7 +92,5 @@ export async function extractTarball(plugin: string, version: string): Promise<v
 
     const stream = Readable.from(decompressed.toString())
     stream.pipe(extract)
-
-  // 3. copy the `addons/` and `cfg/` directories (if they exist) to the main sourcemod install (the same location as the sourceposer.json)
   })
 }
