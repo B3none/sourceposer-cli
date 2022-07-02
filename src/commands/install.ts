@@ -97,7 +97,7 @@ export class Install extends Command {
     }
 
     // perform install
-    this.log('perform install')
+    console.log('[DEBUG] perform install')
 
     await installPlugins(config.plugins)
     // TODO: Implement using the steps below

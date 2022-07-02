@@ -1,6 +1,6 @@
 import {createIfDoesNotExist} from '../directory'
 import * as fs from 'node:fs'
-import {writeFile, readFile} from 'node:fs/promises'
+import {writeFile, readFile, unlink} from 'node:fs/promises'
 import * as request from 'request'
 import * as tar from 'tar-stream'
 import {ungzip} from 'node-gzip'
@@ -41,52 +41,62 @@ export async function downloadTarball(plugin: string, version: string): Promise<
   response.pipe(fs.createWriteStream(localTarball))
 }
 
-export async function processTarball(plugin: string, version: string): Promise<void> {
-  console.log('process tarball')
-  const localTarball = getTarball(plugin, version)
+export async function extractTarball(plugin: string, version: string): Promise<void> {
+  // eslint-disable-next-line no-async-promise-executor
+  return new Promise(async resolve => {
+    console.log('[DEBUG] process tarball')
+    const localTarball = getTarball(plugin, version)
 
-  const compressedContents = await readFile(localTarball)
+    const compressedContents = await readFile(localTarball)
 
-  console.log('decompressing tarball')
-  const decompressed = await ungzip(compressedContents)
+    console.log('[DEBUG] decompressing tarball')
+    const decompressed = await ungzip(compressedContents)
 
-  const extractDirectory: string = getDirectory(plugin)
+    const extractDirectory: string = getDirectory(plugin)
 
-  console.log('extracting tarball contents')
-  const extract = tar.extract()
-  .on('entry', async (header, stream, callback) => {
+    console.log('[DEBUG] extracting tarball contents')
+    const writePromises: Promise<void>[] = []
+
+    const extract = tar.extract()
+    .on('entry', async (header, stream, callback) => {
     // remove the top level directory
-    header.name = header.name.slice(Math.max(0, header.name.indexOf('/') + 1))
+      header.name = header.name.slice(Math.max(0, header.name.indexOf('/') + 1))
 
-    // only allow addons or cfg directories
-    if (header.name.includes('/')) {
-      const [directory] = header.name.split('/')
+      // only allow files in addons or cfg directories
+      if (header.name.includes('/')) {
+        const [directory] = header.name.split('/')
 
-      if (!['addons', 'cfg'].includes(directory)) {
+        if (!['addons', 'cfg'].includes(directory)) {
+          return callback()
+        }
+      } else {
         return callback()
       }
-    }
 
-    const path = `${extractDirectory}/${header.name}`
+      const path = `${extractDirectory}/${header.name}`
 
-    if (header.type === 'directory') {
-      console.log('creating directory:', `${extractDirectory}/${header.name}`)
-      createIfDoesNotExist(`${extractDirectory}/${header.name}`)
-    } else if (header.type === 'file') {
-      console.log('writing file:', header.name)
-      await writeFile(path, stream)
-    }
+      if (header.type === 'directory') {
+        console.log('[CREATE]', `directory: ${extractDirectory}/${header.name}`)
+        createIfDoesNotExist(`${extractDirectory}/${header.name}`)
+      } else if (header.type === 'file') {
+        console.log('[CREATE]', `file: ${header.name}`)
+        writePromises.push(writeFile(path, stream))
+      }
 
-    return callback()
-  })
-  .on('finish', () => {
-    console.log('done!')
-  })
+      return callback()
+    })
+    .on('finish', async () => {
+      await Promise.all(writePromises)
 
-  const stream = Readable.from(decompressed.toString())
-  stream.pipe(extract)
+      await unlink(localTarball)
 
-  // 2. scan the directories within the decompressed files - i've already written a function to do this in helpers/directory.ts getSubDirectories()
+      // Resolve outer promise
+      resolve()
+    })
+
+    const stream = Readable.from(decompressed.toString())
+    stream.pipe(extract)
 
   // 3. copy the `addons/` and `cfg/` directories (if they exist) to the main sourcemod install (the same location as the sourceposer.json)
+  })
 }
