@@ -107,7 +107,7 @@ ALIASES
   $ sourceposer i
 ```
 
-_See code: [dist/commands/install.ts](https://github.com/b3none/sourceposer/blob/v0.0.0/dist/commands/install.ts)_
+_See code: [dist/commands/fetch.ts](https://github.com/b3none/sourceposer/blob/v0.0.0/dist/commands/install.ts)_
 
 ## `sourceposer update [PLUGIN]`
 
