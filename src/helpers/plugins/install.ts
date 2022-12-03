@@ -8,8 +8,8 @@ export async function processInstall(plugins: Record<string, string>): Promise<v
 
   const pluginNames = Object.keys(plugins)
 
-  pluginNames.map(async (plugin) => {
-    const version = plugins[plugin]
+  pluginNames.map(async (plugin: string) => {
+    const version: string = plugins[plugin]
 
     const oldPluginDirectory: string = getPluginDirectory(plugin, false)
     const oldPluginFiles: string[] = await readdir(oldPluginDirectory)
