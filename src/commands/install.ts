@@ -4,7 +4,7 @@ import {isSourceModAndMetaModInstalled, isValidInstallDirectory} from '../helper
 import {ConfigType} from '../types/config'
 import {getReleases} from '../helpers/releases'
 import {isAlphaNumeric} from '../helpers/validators/string'
-import {fetchPluginData, fetchPlugins} from '../helpers/plugins/fetch'
+import {fetchPlugins} from '../helpers/plugins/fetch'
 import {processInstall} from '../helpers/plugins/install'
 
 export class Install extends Command {
